@@ -1,6 +1,8 @@
-from flask import Flask, request, redirect, render_template, session, url_for , flash
+from flask import Flask, request, redirect, render_template, session, url_for, flash
 import os
 import re
+import random
+import string
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key_here'
@@ -24,6 +26,10 @@ def valid_login(username, password):
 # Function to check if a user is logged in
 def is_user_logged_in():
     return 'user_id' in session
+
+# Function to generate random characters
+def generate_random_characters(length=6):
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -61,8 +67,16 @@ def display_text():
     # Get the text submitted from the form
     submitted_text = request.form['text']
     linked_text = convert_urls_to_links(submitted_text)  # Convert any URLs in the text to clickable links
-    # Render the display_text.html template, passing in the processed text
-    return render_template('display_text.html', text=linked_text)
+
+    # Generate a random string of 6 characters
+    random_string = generate_random_characters()
+
+    # Append the random string to the base URL
+    base_url = request.url_root  # Get the base URL of the application
+    new_link = f"{base_url}link/{random_string}"
+
+    # Render the display_text.html template, passing in the processed text and the new link
+    return render_template('display_text.html', text=linked_text, new_link=new_link)
 
 @app.route('/my_links', methods=['GET'])
 def my_links():
@@ -73,3 +87,4 @@ def my_links():
 
 if __name__ == '__main__':
     app.run(host='localhost', port=8080, debug=True)
+
