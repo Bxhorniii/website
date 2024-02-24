@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Links - Eagle Paster</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>Eagle Paster</strong></li>
+        </ul>
+        <ul>
+            <li><a href="/">Home</a></li>
+            {% if 'user_id' in session %}
+                <li><a href="/logout">Logout</a></li>
+            {% else %}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <main class="container">
+        <h2>My Links</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Short ID</th>
+                    <th>Original Text</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for link in links %}
+                <tr>
+                    <td><a href="/{{ link.short_id }}" target="_blank">{{ link.short_id }}</a></td>
+                    <td>{{ link.original_text[:20]}}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    <footer class="container">
+        <small><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
+    </footer>
+</body>
+</html>

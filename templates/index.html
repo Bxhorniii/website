@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Text Shortener</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>Eagle Paster</strong></li>
+        </ul>
+        <ul>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        <div class="grid">
+            <section>
+                <hgroup>
+                    <h2>Shorten Your Text</h2>
+                    <h3>Easy and Fast</h3>
+                </hgroup>
+                <p>Enter your text below to shorten it.</p>
+                <form action="/display_text" method="post">
+                    <textarea name="text" rows="4" cols="50" placeholder="Enter your text here..." required></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
